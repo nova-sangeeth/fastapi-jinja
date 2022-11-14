@@ -1,0 +1,26 @@
+//get line number from monaco editor
+const lineNumber = this.editor.getPosition().lineNumber;
+
+//get the matche from regex
+const regexMatch = this.editor.model.findMatches(query, true, true, false, false, false);
+
+//get the current line
+const line = this.editor.model.getLineContent(lineNumber);
+
+//get the current word
+const word = this.editor.getModel().getWordAtPosition({lineNumber, column: this.editor.getPosition().column});
+
+//get the word to replace
+const replaceWord = this.editor.getModel().getValueInRange({startLineNumber: lineNumber, startColumn: word.startColumn, endLineNumber: lineNumber, endColumn: word.endColumn});
+
+//remove the word from line
+const newLine = line.replace(replaceWord, "")
+
+//if word found in regexmatches
+if (regexMatch.length > 0) {
+
+    //get the first match
+    const firstMatch = regexMatch[0];
+
+    //get all the matches from same line
+    const sameLineMatches = regexMatch.filter(match => match.range.startLineNumber === firstMatch.range.startLineNumber);
