@@ -33,6 +33,9 @@ require(["vs/editor/editor.main"], function () {
     language: "python",
   });
   const model = editorInstance.getModel();
+  console.log(editorInstance.saveViewState())
+  console.log(editorInstance.getVisibleRanges())
+  console.log(editorInstance)
 
   // - Configuration for the Constrained Editor : Starts Here
   const constrainedInstance = constrainedEditor(monaco);
@@ -88,4 +91,6 @@ require(["vs/editor/editor.main"], function () {
     },
   ]);
   // - Configuration for the Constrained Editor : Ends Here
+  console.log("MonacoEditormodel " ,model.getCurrentEditableRanges());
+
 });
